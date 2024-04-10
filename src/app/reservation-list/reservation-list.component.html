@@ -1,0 +1,40 @@
+<app-home></app-home>
+<h3 class="mt-5 mb-3">Lista de Pedidos</h3>
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nome Cliente</th>
+        <th>produto</th>
+        <!--<th>Email</th>-->
+        <th>Quantidade</th>
+        <th>endereco</th>
+
+        <th>data da Compra</th>
+        <th>Data de Entrega</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let reservation of reservations">
+    <td>{{reservation.Name}}</td>
+    <td>{{reservation.Produto}}</td>
+    <!--<td>{{reservation.Email}}</td>-->
+    <td>{{reservation.Quantidade}}</td>
+    <td> {{reservation.endereco}} </td>
+    <td> {{reservation.dataCompra}} </td>
+    <td>{{reservation.dataEntrega}}</td>
+    <td>
+      <button class="btn btn-sm btn-danger mx-1" (click)="deleteReservation(reservation.id)">Delete</button>
+      <button class="btn btn-sm btn-secondary mx-1" [routerLink]="['/edit', reservation.id]">Editar</button>
+    </td>
+
+    </tbody>
+  </table>
+<ul *ngIf="reservations.length; else noReservation">
+
+</ul>
+
+<ng-template #noReservation>
+    <p>Não tem produto Cadastrado!</p>
+</ng-template>
+</div>

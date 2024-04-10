@@ -1,0 +1,107 @@
+
+<app-home></app-home>
+<h3 class="mt-5 mb-3">Criar um Novo Pedido</h3>
+<br />
+<form [formGroup]="reservationForm"  (ngSubmit)="onSubmit()">
+
+  <div class="row mb-3">
+    <div class="col">
+      <label class="form-label">Nome Cliente:</label>
+      <input class="form-control" type="text" formControlName="Name" />
+      <small class="text-danger" *ngIf="reservationForm.get('Name')?.invalid && reservationForm.get('Name')?.touched">
+        Nome Cliente is required
+      </small>
+    </div>
+
+    <!--<div class="col">
+    <label class="form-label">Produto:</label>
+    <input class="form-control" type="text" formControlName="Produto" />
+    <small class="text-danger" *ngIf="reservationForm.get('Produto')?.invalid && reservationForm.get('Produto')?.touched">
+      Guest Name is required
+    </small>
+  </div>-->
+
+
+    <div class="col">
+      <label class="form-label">Produto:</label>
+      <select class="form-control" formControlName="Produto">
+        <option value="martelo">Martelo</option>
+        <option value="prego">Prego</option>
+        <option value="areia">Areia</option>
+        <!-- Adicione mais opções conforme necessário -->
+      </select>
+      <small class="text-danger" *ngIf="reservationForm.get('Produto')?.invalid && reservationForm.get('Produto')?.touched">
+        Escolha um produto válido.
+      </small>
+    </div>
+
+    <div class="col">
+      <label class="form-label">Endereço :</label>
+      <input class="form-control" type="text" formControlName="endereco" />
+      <small class="text-danger" *ngIf="reservationForm.get('endereco')?.invalid && reservationForm.get('endereco')?.touched">
+        Endereço is required.
+      </small>
+    </div>
+
+    <div class="col">
+      <label class="form-label">Email :</label>
+      <input class="form-control" type="email" formControlName="Email" />
+      <small class="text-danger" *ngIf="reservationForm.get('Email')?.invalid && reservationForm.get('Email')?.touched">
+        Email is required
+      </small>
+    </div>
+  </div>
+
+
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Quantidade de Item :</label>
+        <input class="form-control" type="number" formControlName="Quantidade" />
+        <small class="text-danger" *ngIf="reservationForm.get('Quantidade')?.invalid && reservationForm.get('Quantidade')?.touched">
+          Quantidade de Item is required
+        </small>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <label class="form-label">data da Compra :</label>
+          <input class="form-control" type="date" formControlName="dataCompra" />
+          <small class="text-danger" *ngIf="reservationForm.get('dataCompra')?.invalid && reservationForm.get('dataCompra')?.touched">
+            data Compra is required.
+          </small>
+        </div>
+
+        <div class="col">
+          <label class="form-label">data de Entrega :</label>
+          <input class="form-control" type="date" formControlName="dataEntrega" />
+          <small class="text-danger" *ngIf="reservationForm.get('dataEntrega')?.invalid && reservationForm.get('dataEntrega')?.touched">
+            data Entrega is required
+          </small>
+        </div>
+      </div>
+
+      <div class="col">
+        <label class="form-label">Preço:</label>
+        <div *ngIf="reservationForm.get('Produto')?.value === 'prego'">
+          <input class="form-control" type="text" [value]="8" disabled />
+        </div>
+        <div *ngIf="reservationForm.get('Produto')?.value === 'areia'">
+          <input class="form-control" type="text" [value]="10" disabled />
+        </div>
+        <div *ngIf="reservationForm.get('Produto')?.value === 'martelo'">
+          <input class="form-control" type="text" [value]="20" disabled />
+        </div>
+      </div>
+      
+
+      <br>
+      <br>
+
+        <label class="form-label">Valor Total:</label>
+  <label><strong>{{ (selectedProductPrice !== null && reservationForm.get('Quantidade')?.value !== null) ? (selectedProductPrice * reservationForm.get('Quantidade')?.value) : 0 }}</strong></label>
+
+  <br>
+
+    </div>
+    <button class="btn btn-primary" [disabled] ="reservationForm.invalid" type="submit">Salvar</button>
+
+</form>
